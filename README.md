@@ -54,7 +54,7 @@ PYTHONPATH=src /tmp/venv-untangle/bin/python -m pytest tests -q
 ## 复现
 
 ```bash
-python3 -m venv .venv && .venv/bin/pip install 'defusedxml==0.7.1' 'pytest==9.2.0'
+python3 -m venv .venv && .venv/bin/pip install -q 'defusedxml==0.7.1' 'pytest==9.2.0' && .venv/bin/python -m pytest tests/test_diff.py -q
 .venv/bin/python benchmark/bench.py --impl baseline --out benchmark/baseline.json
 .venv/bin/python benchmark/bench.py --impl optimized --out benchmark/optimized.json
 ```
