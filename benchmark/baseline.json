@@ -1,0 +1,86 @@
+{
+  "command": "/tmp/venv-untangle/bin/python benchmark/bench.py --impl baseline --out benchmark/baseline.json",
+  "cpu_count": 4,
+  "cpu_model": "AMD EPYC 7K62 48-Core Processor",
+  "impl": "baseline",
+  "lscpu_head20": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           48 bits physical, 48 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  4\nOn-line CPU(s) list:                     0-3\nVendor ID:                               AuthenticAMD\nModel name:                              AMD EPYC 7K62 48-Core Processor\nCPU family:                              23\nModel:                                   49\nThread(s) per core:                      1\nCore(s) per socket:                      4\nSocket(s):                               1\nStepping:                                0\nBogoMIPS:                                5190.24\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm rep_good nopl cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 fma cx16 sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw topoext ibpb vmmcall fsgsbase bmi1 avx2 smep bmi2 rdseed adx smap clflushopt sha_ni xsaveopt xsavec xgetbv1 arat\nHypervisor vendor:                       KVM\nVirtualization type:                     full\nL1d cache:                               128 KiB (4 instances)\nL1i cache:                               128 KiB (4 instances)\n",
+  "mem_total_kb": 3812564,
+  "peak_rss_kb": 26108,
+  "phase_split_4000": {
+    "method": "7 runs in one process, median of parse phase and query phase separately",
+    "parse_median_s": 0.01355,
+    "query_median_s": 0.37395,
+    "query_share_pct": 96.5
+  },
+  "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "repeat": 5,
+  "results": {
+    "1000": {
+      "max_s": 0.02526956284418702,
+      "mean_s": 0.02517078733071685,
+      "median_s": 0.025206284131854773,
+      "min_s": 0.025042555760592222,
+      "p25_s": 0.02508028782904148,
+      "p75_s": 0.025255246087908745,
+      "rsd_pct": 0.4108760828868056,
+      "samples_s": [
+        0.025042555760592222,
+        0.02526956284418702,
+        0.025255246087908745,
+        0.02508028782904148,
+        0.025206284131854773
+      ]
+    },
+    "250": {
+      "max_s": 0.002552189864218235,
+      "mean_s": 0.002220031339675188,
+      "median_s": 0.0021483697928488255,
+      "min_s": 0.002100681886076927,
+      "p25_s": 0.0021187649108469486,
+      "p75_s": 0.002180150244385004,
+      "rsd_pct": 8.47368865879264,
+      "samples_s": [
+        0.002100681886076927,
+        0.0021483697928488255,
+        0.002552189864218235,
+        0.002180150244385004,
+        0.0021187649108469486
+      ]
+    },
+    "4000": {
+      "max_s": 0.3832164672203362,
+      "mean_s": 0.38155373353511096,
+      "median_s": 0.38194713508710265,
+      "min_s": 0.3788901693187654,
+      "p25_s": 0.3813810939900577,
+      "p75_s": 0.3823338020592928,
+      "rsd_pct": 0.4276974678434535,
+      "samples_s": [
+        0.38194713508710265,
+        0.3788901693187654,
+        0.3813810939900577,
+        0.3832164672203362,
+        0.3823338020592928
+      ]
+    }
+  },
+  "scales": [
+    250,
+    1000,
+    4000
+  ],
+  "seed": 20261031,
+  "upstream": "stchris/untangle",
+  "upstream_commit": "8a4740cf5eb54bb4166e4a4986222a89549127f5",
+  "upstream_tests": {
+    "command": "PYTHONPATH=src python -m pytest tests -q",
+    "commit": "8a4740cf5eb54bb4166e4a4986222a89549127f5",
+    "failed": 0,
+    "passed": 99,
+    "result": "99 passed in 0.80s",
+    "when": "before patch"
+  },
+  "warmup": 3,
+  "workload": "parse a wide XML document with N distinct child tags, then call get_elements(tag) once for every tag"
+}

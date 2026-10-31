@@ -1,0 +1,66 @@
+diff --git a/src/untangle/__init__.py b/src/untangle/__init__.py
+index 3bd9d0b..7508fc5 100644
+--- a/src/untangle/__init__.py
++++ b/src/untangle/__init__.py
+@@ -38,6 +38,8 @@ class Element:
+         self._name = name
+         self._attributes = attributes
+         self.children = []
++        self._children_by_name = {}
++        self._indexed_count = 0
+         self.is_root = False
+         self.cdata = ""
+ 
+@@ -46,6 +48,8 @@ class Element:
+         Store child elements.
+         """
+         self.children.append(element)
++        self._children_by_name.setdefault(element._name, []).append(element)
++        self._indexed_count = len(self.children)
+ 
+     def add_cdata(self, cdata):
+         """
+@@ -59,12 +63,23 @@ class Element:
+         """
+         return self._attributes.get(key)
+ 
++    def _ensure_index(self):
++        """
++        Rebuild the name index if children were mutated directly.
++        """
++        if len(self.children) != self._indexed_count:
++            self._children_by_name = {}
++            for child in self.children:
++                self._children_by_name.setdefault(child._name, []).append(child)
++            self._indexed_count = len(self.children)
++
+     def get_elements(self, name=None):
+         """
+         Find a child element by name
+         """
+         if name:
+-            return [e for e in self.children if e._name == name]
++            self._ensure_index()
++            return list(self._children_by_name.get(name, ()))
+         else:
+             return self.children
+ 
+@@ -72,7 +87,7 @@ class Element:
+         return self.get_attribute(key)
+ 
+     def __getattr__(self, key):
+-        matching_children = [x for x in self.children if x._name == key]
++        matching_children = self.get_elements(key)
+         if matching_children:
+             if len(matching_children) == 1:
+                 self.__dict__[key] = matching_children[0]
+@@ -86,7 +101,8 @@ class Element:
+     def __hasattribute__(self, name):
+         if name in self.__dict__:
+             return True
+-        return any(x._name == name for x in self.children)
++        self._ensure_index()
++        return name in self._children_by_name
+ 
+     def __iter__(self):
+         yield self

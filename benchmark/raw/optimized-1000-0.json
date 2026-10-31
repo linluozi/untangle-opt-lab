@@ -1,0 +1,9 @@
+{
+  "impl": "optimized",
+  "iteration": 0,
+  "repeat": 5,
+  "scale": 1000,
+  "seconds": 0.003327764105051756,
+  "seed": 20261031,
+  "warmup": 3
+}

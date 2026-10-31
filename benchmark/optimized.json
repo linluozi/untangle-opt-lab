@@ -1,0 +1,80 @@
+{
+  "command": "/tmp/venv-untangle/bin/python benchmark/bench.py --impl optimized --out benchmark/optimized.json",
+  "cpu_count": 4,
+  "cpu_model": "AMD EPYC 7K62 48-Core Processor",
+  "impl": "optimized",
+  "lscpu_head20": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           48 bits physical, 48 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  4\nOn-line CPU(s) list:                     0-3\nVendor ID:                               AuthenticAMD\nModel name:                              AMD EPYC 7K62 48-Core Processor\nCPU family:                              23\nModel:                                   49\nThread(s) per core:                      1\nCore(s) per socket:                      4\nSocket(s):                               1\nStepping:                                0\nBogoMIPS:                                5190.24\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm rep_good nopl cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 fma cx16 sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw topoext ibpb vmmcall fsgsbase bmi1 avx2 smep bmi2 rdseed adx smap clflushopt sha_ni xsaveopt xsavec xgetbv1 arat\nHypervisor vendor:                       KVM\nVirtualization type:                     full\nL1d cache:                               128 KiB (4 instances)\nL1i cache:                               128 KiB (4 instances)\n",
+  "mem_total_kb": 3812564,
+  "peak_rss_kb": 27020,
+  "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "repeat": 5,
+  "results": {
+    "1000": {
+      "max_s": 0.0035245628096163273,
+      "mean_s": 0.003417560178786516,
+      "median_s": 0.0034076529555022717,
+      "min_s": 0.003327764105051756,
+      "p25_s": 0.003401943016797304,
+      "p75_s": 0.003425878006964922,
+      "rsd_pct": 2.065111709360878,
+      "samples_s": [
+        0.003327764105051756,
+        0.003425878006964922,
+        0.0035245628096163273,
+        0.003401943016797304,
+        0.0034076529555022717
+      ]
+    },
+    "250": {
+      "max_s": 0.001215820200741291,
+      "mean_s": 0.0009336314164102077,
+      "median_s": 0.0008691507391631603,
+      "min_s": 0.0008478802628815174,
+      "p25_s": 0.0008568968623876572,
+      "p75_s": 0.0008784090168774128,
+      "rsd_pct": 16.942072344592102,
+      "samples_s": [
+        0.0008478802628815174,
+        0.001215820200741291,
+        0.0008784090168774128,
+        0.0008568968623876572,
+        0.0008691507391631603
+      ]
+    },
+    "4000": {
+      "max_s": 0.01888869982212782,
+      "mean_s": 0.016532683558762074,
+      "median_s": 0.015617962926626205,
+      "min_s": 0.015427747275680304,
+      "p25_s": 0.01554175978526473,
+      "p75_s": 0.01718724798411131,
+      "rsd_pct": 9.082406022712474,
+      "samples_s": [
+        0.01718724798411131,
+        0.01888869982212782,
+        0.015427747275680304,
+        0.01554175978526473,
+        0.015617962926626205
+      ]
+    }
+  },
+  "scales": [
+    250,
+    1000,
+    4000
+  ],
+  "seed": 20261031,
+  "upstream": "stchris/untangle",
+  "upstream_commit": "8a4740cf5eb54bb4166e4a4986222a89549127f5",
+  "upstream_tests": {
+    "command": "PYTHONPATH=src python -m pytest tests -q",
+    "commit": "8a4740cf5eb54bb4166e4a4986222a89549127f5",
+    "failed": 0,
+    "passed": 99,
+    "result": "99 passed in 0.93s",
+    "when": "after patch"
+  },
+  "warmup": 3,
+  "workload": "parse a wide XML document with N distinct child tags, then call get_elements(tag) once for every tag"
+}
