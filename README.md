@@ -36,16 +36,17 @@ Upstream: https://github.com/stchris/untangle
 | --- | --- | --- |
 | G1 上游测试全绿 | 通过：改动后 99 passed, 0 failed（0.93s） | 见下方 G1 命令 |
 | G2 差分一致 | 通过：1215 组，0 差异 | `python -m pytest tests/test_diff.py -q` |
-| G3 中位加速 ≥1.15x | 通过：7.40x | 读取 `benchmark/*.json` 的 `results.*.median_s` |
-| G4 最大规模不退化 | 通过：24.46x（≥0.95x） | 同上，规模 4000 |
-| G5 峰值 RSS ≤1.10x | 通过：26.4 MiB / 25.5 MiB = 1.035x | `python -c "import json;b=json.load(open('benchmark/baseline.json'));o=json.load(open('benchmark/optimized.json'));print(o['peak_rss_kb']/b['peak_rss_kb'])"` |
+| G3 中位加速 ≥1.15x | 通过：7.40x | `python benchmark/compare.py` |
+| G4 最大规模不退化 | 通过：24.46x（≥0.95x） | `python benchmark/compare.py` |
+| G5 峰值 RSS ≤1.10x | 通过：26.4 MiB / 25.5 MiB = 1.035x | `python benchmark/compare.py` |
 
 G1 的原始命令（在干净 clone 上先 `git apply --check`，再跑上游自己的测试）：
 
 ```bash
 python3 -m venv /tmp/venv-untangle && /tmp/venv-untangle/bin/pip install 'defusedxml==0.7.1' 'pytest==9.2.0'
+REPO=$(pwd)
 git clone --depth=1 git@github-linluozi:stchris/untangle.git /tmp/untangle-g1
-cd /tmp/untangle-g1 && git apply /path/to/untangle-opt-lab/patch.diff
+cd /tmp/untangle-g1 && git apply "$REPO/patch.diff"
 PYTHONPATH=src /tmp/venv-untangle/bin/python -m pytest tests -q
 ```
 
